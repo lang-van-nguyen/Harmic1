@@ -1,5 +1,4 @@
 ﻿using Harmic1.Models;
-
 using Microsoft.AspNetCore.Mvc;
 
 namespace Harmic1.Controllers
@@ -20,22 +19,32 @@ namespace Harmic1.Controllers
         {
             try
             {
-                TbContact contact = new TbContact();
-                contact.Name = name;
-                contact.Phone = phone;
-                contact.Email = email;
-                contact.Message = message;
-                contact.CreatedDate = DateTime.Now;
-                _context.Add(contact);
-                _context.SaveChangesAsync();
+                // Tạo một thực thể mới cho TbContact
+                TbContact contact = new TbContact
+                {
+                    Name = name,
+                    Phone = phone,
+                    Email = email,
+                    Message = message,
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = "System" // Hoặc gán giá trị phù hợp
+                };
 
-                return Json(new { status = true });
+                // Thêm dữ liệu vào DbSet
+                _context.TbContacts.Add(contact);
 
+                // Lưu thay đổi vào cơ sở dữ liệu
+                _context.SaveChanges();
+
+                // Trả về trạng thái thành công
+                return Json(new { status = true, message = "Dữ liệu đã được thêm vào thành công." });
             }
-            catch
+            catch (Exception ex)
             {
-                return Json(new { status = false });
+                // Trả về lỗi và thông tin
+                return Json(new { status = false, message = "Có lỗi xảy ra: " + ex.Message });
             }
         }
+
     }
 }
