@@ -2,10 +2,11 @@
 
 @foreach (var item in Model)
 {
+    string sUrl = $"/blog/{item.Alias}-{item.BlogId}.html" ;
     <div class="swiper-slide">
         <div class="blog-item">
             <div class="blog-img img-zoom-effect">
-                <a href="blog-detail-left-sidebar.html">
+                <a href="@sUrl">
                     <img class="img-full" src="~/assets/images/blog/@item.Image" alt="Blog Image">
                 </a>
             </div>
@@ -15,7 +16,7 @@
                         <li class="date"><i class="fa fa-calendar-o me-2"></i>@item.CreatedDate.Value.ToString("dd/MM/yy")</li>
                         <li>
                             <span class="comments me-3">
-                                <a href="javascript:void(0)">2 Comments</a>
+                                <a href="javascript:void(0)"> 2 Comment</a>
                             </span>
                             <span class="link-share">
                                 <a href="javascript:void(0)">Share</a>
