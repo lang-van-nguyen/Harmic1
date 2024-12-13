@@ -1,0 +1,82 @@
+﻿@model Harmic1.Models.TbProduct
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Xóa sản phẩm</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Xóa sản phẩm</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Full width column -->
+                <div class="col-12">
+                    <!-- Changed from col-md-6 to col-12 for full width -->
+                    <!-- general form elements -->
+                    <div class="card card-danger">
+                        <div class="card-header">
+                            <h3 class="card-title">Xóa sản phẩm</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="Title">Tiêu đề:</label>
+                                @Html.DisplayFor(model => model.Title)
+                            </div>
+                            <div class="form-group">
+                                <label for="Alias">Alias:</label>
+                                @Html.DisplayFor(model => model.Alias)
+                            </div>
+                            <div class="form-group">
+                                <label for="Detail">Chi tiết:</label>
+                                @Html.DisplayFor(model => model.Detail)
+                            </div>
+
+                            <!-- Display Image -->
+                            <div class="form-group">
+                                <label for="Image">Ảnh:</label>
+                                <img src="@Url.Content("~/assets/images/product/" + Model.Image)" width="100" height="100" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="IsActive">Hiển thị:</label>
+                                @Html.DisplayFor(model => model.IsActive)
+                            </div>
+
+                            <!-- Delete Form -->
+                            <form method="post" asp-action="Delete">
+                                <input type="hidden" asp-for="ProductId" />
+                                <input type="submit" value="Xóa" class="btn btn-danger" />
+                                <a asp-action="Index" class="btn btn-primary">Quay lại</a>
+                            </form>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!--/.col -->
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>

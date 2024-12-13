@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Harmic1.Models.TbMenu>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Quản lý menu</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Simple Tables</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h3 class="card-title">
+                                <a asp-action="Create" class="btn btn-success">
+                                    <i class="fas fa-plus"></i> Thêm mới
+                                </a>
+                            </h3>
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 250px;">
+                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Tìm kiếm...">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-bordered table-hover text-nowrap">
+                                <thead class="thead-light">
+                                    <tr class="text-center">
+                                        <th style="width: 5%;">STT</th>
+                                        <th style="width: 25%;">Tiêu đề</th>
+                                        <th style="width: 15%;">Alias</th>
+                                        <th style="width: 10%;">Cấp</th>
+                                        <th style="width: 10%;">Vị trí</th>
+                                        <th style="width: 10%;">Hiện</th>
+                                        <th style="width: 25%;">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int i = 1;
+                                    }
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@(i++)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Alias)</td>
+                                            <td class="text-center">@Html.DisplayFor(modelItem => item.Levels)</td>
+                                            <td class="text-center">@Html.DisplayFor(modelItem => item.Position)</td>
+                                            <td class="text-center">
+                                                <span class="badge badge-@(item.IsActive ? "success" : "danger")">
+                                                    @(item.IsActive ? "Hiện" : "Ẩn")
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <a asp-action="Edit" asp-route-id="@item.MenuId" class="btn btn-primary btn-sm" title="Sửa">
+                                                    <i class="fas fa-edit"></i> Sửa
+                                                </a>
+                                                <a asp-action="Details" asp-route-id="@item.MenuId" class="btn btn-info btn-sm" title="Chi tiết">
+                                                    <i class="fas fa-info-circle"></i> Chi tiết
+                                                </a>
+                                                <a asp-action="Delete" asp-route-id="@item.MenuId" class="btn btn-danger btn-sm" title="Xóa" onclick="return confirm('Bạn có chắc chắn muốn xóa?');">
+                                                    <i class="fas fa-trash"></i> Xóa
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
